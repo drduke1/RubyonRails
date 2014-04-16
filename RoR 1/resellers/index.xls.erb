@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Company Name</Data></Cell>
+		    <Cell><Data ss:Type="String">Contact Name</Data></Cell>
+		    <Cell><Data ss:Type="String">Contact Title</Data></Cell>
+		    <Cell><Data ss:Type="String">Contact Email</Data></Cell>
+		    <Cell><Data ss:Type="String">Company Phone</Data></Cell>
+		    <Cell><Data ss:Type="String">Company Website</Data></Cell>
+		    <Cell><Data ss:Type="String">Company Region</Data></Cell>
+		    <Cell><Data ss:Type="String">Company Country</Data></Cell>
+		    <Cell><Data ss:Type="String">Company Address</Data></Cell>
+		    <Cell><Data ss:Type="String">Company City</Data></Cell>
+		    <Cell><Data ss:Type="String">Company State</Data></Cell>
+		    <Cell><Data ss:Type="String">Company Zip</Data></Cell>
+		    <Cell><Data ss:Type="String">Sales Contact Name</Data></Cell>
+		    <Cell><Data ss:Type="String">Sales Contact Email</Data></Cell>
+		    <Cell><Data ss:Type="String">Tech Contact Name</Data></Cell>
+		    <Cell><Data ss:Type="String">Tech Contact Email</Data></Cell>
+		    <Cell><Data ss:Type="String">Additional Name1</Data></Cell>
+		    <Cell><Data ss:Type="String">Additional Email1</Data></Cell>
+		    <Cell><Data ss:Type="String">Additional Name2</Data></Cell>
+		    <Cell><Data ss:Type="String">Additional Email2</Data></Cell>
+		    <Cell><Data ss:Type="String">Distributor</Data></Cell>
+		    <Cell><Data ss:Type="String">Area Served</Data></Cell>
+		    <Cell><Data ss:Type="String">Status</Data></Cell>
+		    <Cell><Data ss:Type="String">Registered</Data></Cell>
+      </Row>
+    <% @all_resellers.each do |reseller| %>
+      <Row>        
+        <Cell><Data ss:Type="String"><%= reseller.company_name %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.contact_name %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.contact_title %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.contact_email %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.company_phone %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.company_website %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.company_region %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.company_country %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.company_address %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.company_city %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.company_state %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.company_zip %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.sales_contact_name %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.sales_contact_email %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.tech_contact_name %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.tech_contact_email %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.additional_name %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.additional_email %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.additional_name2 %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.additional_email2 %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.distributor %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.area_served %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.approved %></Data></Cell>
+		    <Cell><Data ss:Type="String"><%= reseller.created_at %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

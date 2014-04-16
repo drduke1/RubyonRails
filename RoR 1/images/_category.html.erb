@@ -1,0 +1,56 @@
+<style>
+	a:hover {
+		background: none;
+	}
+	
+	.images {
+		margin-bottom: 50px;
+	}
+	
+	div.span3 {
+		background: white;
+		border: 1px solid #eee;
+		border-radius: 5px;
+		padding: 30px;
+
+    
+	}
+
+</style>
+
+<div class="row images">
+	<div class="span3" id="shade">
+		<%= link_to (image_tag "/img/enterprise_ip_telephony.png", alt: "Enterprise IP Telephony"), action: "index", filter: "enterprise_ip_telephony" %>
+		<h5 class="pagination-centered">Enterprise IP Telephony</h5>
+	</div>
+	<div class="span3">
+		<%= link_to (image_tag "/img/enterprise_gateways.png", alt: "Enterprise Analog Gateways"), action: "index", filter: "enterprise_gateways" %>
+		<h5 class="pagination-centered">Enterprise Gateways</h5>
+	</div>
+	<div class="span3">
+		<%= link_to (image_tag "/img/consumer_atas.png", alt: "Consumer ATAs"), action: "index", filter: "consumer_atas" %>
+		<h5 class="pagination-centered">Consumer ATAs</h5>
+	</div>
+</div>
+
+<div class="row images">
+	<div class="span3">
+		<%= link_to (image_tag "/img/ip_video_telephony.png", alt: "IP Video Telephony"), action: "index", filter: "ip_video_telephony" %>
+		<h5 class="pagination-centered">IP Video Telephony</h5>
+	</div>
+	<div class="span3">
+		<%= link_to (image_tag "/img/ip_video_surveillance.png", alt: "IP Video Surveillance"), action: "index", filter: "ip_video_surveillance" %>
+		<h5 class="pagination-centered">IP Video Surveillance</h5>
+	</div>
+	<div class="span3">
+		<%= link_to (image_tag "/img/logos_and_graphics.png", alt: "Logos and Graphics"), action: "index", filter: "logos_and_graphics" %>
+		<h5 class="pagination-centered">Logos and Graphics</h5>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span3">
+		<%= link_to (image_tag "/img/unified_communications.png", alt: "IP PBX"), action: "index", filter: "ip_pbx" %>
+		<h5 class="pagination-centered">IP PBX</h5>
+	</div>
+</div>

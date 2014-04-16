@@ -1,0 +1,119 @@
+<%= render 'example/info' %>
+<%= render 'layouts/opentag' %>
+
+<h1><%= @reseller.company_name %> - Edit</h1>
+
+<fieldset>
+	<div class="row">
+		<span class="span5 offset2">
+			<p>Company Name: <%= @reseller.company_name %></p>
+			<p>Company Phone: <%= @reseller.company_phone %></p>
+			<p>Company Website: <%= @reseller.company_website %></p>
+			<p>Contact Name: <%= @reseller.contact_name %></p>
+			<p>Contact Email: <%= @reseller.contact_email %></p>
+			<p>Contact Title: <%= @reseller.contact_title %></p>
+			<p>Sales Contact Name: <%= @reseller.sales_contact_name %></p>
+			<p>Sales Contact Email: <%= @reseller.sales_contact_email %></p>
+			<p>Tech Contact Name: <%= @reseller.tech_contact_name %></p>
+			<p>Tech Contact Email: <%= @reseller.tech_contact_email %></p>
+			<p>Additional Email: <%= @reseller.additional_email %></p>
+			<p>Additional Email: <%= @reseller.additional_email2 %></p>
+			<p>Adress: <%= @reseller.company_address %></p>
+			<p>City: <%= @reseller.company_city %></p>
+			<p>State: <%= @reseller.company_state %></p>
+			<p>Postal: <%= @reseller.company_zip %></p>
+			<p>Country: <%= @reseller.company_country %></p>
+			<p>Region: <%= @reseller.company_region %></p>
+			<p>Area(s) Served: <%= @reseller.area_served %></p>
+			
+			
+		</span>
+		<span class="span1"></span>
+		<span class="span5">
+			<% if @reseller_users_incerts.include?(@reseller.id) %>
+					<p>Trained: Yes</p>
+			<% else %>
+					<p>Trained: No</p>
+				<% end %>
+			
+			<% @current_trained = [] %>
+			<% @non_trained = [] %>
+			<% @current_users.each do |t| %>
+				<% if @trained_users.include?(t) %>
+				<% @current_trained << t %>
+				<% else %>
+				<% @non_trained << t %>
+				<% end %>
+			<% end %>
+			
+				<%= form_for @untrained, :url => certificates_path(@untrained) do |f| %>
+					<p> Trained Users </p>
+					<%= select_tag "certificate[user_id]", options_for_select(@current_trained.collect{|x| [x.name, x.id]}), {:multiple => :multiple} %>
+					<%= f.submit "Un-Train", class: "btn btn-large btn-primary" %>
+				<% end %>
+			
+			
+			<%= form_for @trained, :url => certificates_path, :method => :post do |f| %>
+				<p> Non-Trained Users </p>
+				<%= select_tag "certificate[user_id]", options_for_select(@non_trained.collect{|x| [x.name, x.id]}), {:multiple => :multiple} %>
+				<%= f.submit "Train", class: "btn btn-large btn-primary" %>
+			<% end %>
+			
+			<%= form_for @reseller, :url => examples_reseller_path(@reseller) do |f| %>
+				<p>Distributor: <%= f.text_field :distributor %></p>
+				<p><%= f.submit "Save"%></p>
+			<% end %>
+			
+			<% if @reseller.approved %>
+				<p>Approved By: <%= @reseller.example.name %></p>
+			<% else %>
+				<% if @reseller.example_id %>
+					<p>Un-approved By: <%= @reseller.example.name %></p>
+				<% else %>
+					<p> New Reseller </p>
+				<% end %>
+			<% end %>
+			
+		</span>
+	</div>
+</fieldset>
+
+<%= form_for @reseller, :url => examples_reseller_path(@reseller), :action => "approve" do |f| %>
+  <% if @reseller.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reseller.errors.count, "error") %> prohibited this reseller from being saved:</h2>
+
+      <ul>
+      <% @reseller.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if current_example.region.include? 'View' %>
+
+  <% else %>
+  	<div class="pagination-centered">
+	  	<p class="pagination-centered">
+			  <div class="field">
+			    <% if @reseller.approved? %>
+			    	<%= f.hidden_field(:approved, value: 0) %>
+			    <% else %>
+			    	<%= f.hidden_field(:approved, value: 1) %>
+			    <% end %>
+			  </div>
+			  <div class="actions">
+			  	<% if @reseller.approved? %>
+			    	<%= f.submit "Un-Approve", class: "btn btn-large btn-danger" %>
+			    <% else %>
+			    	<%= f.submit "Approve", class: "btn btn-large btn-success" %>
+			    <% end %>
+			  </div>
+	  	</p>
+  	</div>
+	 <% end %>
+<% end %>
+
+
+<%= link_to 'Back', examples_resellers_path %>

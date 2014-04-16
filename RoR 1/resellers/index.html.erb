@@ -1,0 +1,201 @@
+<% provide(:title, "#{current_example.name} - Resellers") %>
+<% provide(:resellers_class, "class=active") %>
+
+<%= render 'examples/info' %>
+<%= render 'layouts/opentag' %>
+
+<style>
+	a:hover { 
+			background-color: transparent;
+			color:black;
+	}
+	.tablesorter-filter-row td {
+		  background: #eee;
+		  line-height: normal;
+		  text-align: center; /* center the input */
+		  -webkit-transition: line-height 0.1s ease;
+		  -moz-transition: line-height 0.1s ease;
+		  -o-transition: line-height 0.1s ease;
+		  transition: line-height 0.1s ease;
+	}
+		/* optional disabled input styling */
+		.tablesorter-filter-row .disabled {
+		  opacity: 0.5;
+		  filter: alpha(opacity=50);
+		  cursor: not-allowed;
+	}
+		
+		/* hidden filter row */
+		.tablesorter-filter-row.hideme td {
+		  /*** *********************************************** ***/
+		  /*** change this padding to modify the thickness     ***/
+		  /*** of the closed filter row (height = padding x 2) ***/
+		  padding: 2px;
+		  /*** *********************************************** ***/
+		  margin: 0;
+		  line-height: 0;
+		  cursor: pointer;
+	}
+		.tablesorter-filter-row.hideme .tablesorter-filter {
+		  height: 1px;
+		  min-height: 0;
+		  border: 0;
+		  padding: 0;
+		  margin: 0;
+		  /* don't use visibility: hidden because it disables tabbing */
+		  opacity: 0;
+		  filter: alpha(opacity=0);
+	}
+		
+		/* filters */
+		.tablesorter-filter {
+		  width: 95%;
+		  height: inherit;
+		  margin: 0px 5px 0px -4px;
+		  padding: 0px;
+		  background-color: #fff;
+		  border: 1px solid #bbb;
+		  color: #333;
+		  -webkit-box-sizing: border-box;
+		  -moz-box-sizing: border-box;
+		  box-sizing: border-box;
+		  -webkit-transition: height 0.1s ease;
+		  -moz-transition: height 0.1s ease;
+		  -o-transition: height 0.1s ease;
+		  transition: height 0.1s ease;
+	}
+	
+		.reset {
+			margin: 5px 3px 5px 3px;
+			float:right;
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+			background-color: #006ccc;
+			*background-color: #0044cc;
+			background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+			background-repeat: repeat-x;
+			border-color: #0044cc #0044cc #002a80;
+			border: 1px solid #006ccc; 
+			-webkit-border-radius: 5px;
+			border-radius: 10px;  font-size:16px;
+			-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); 
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); 
+			-webkit-align-items: flex-start; box-sizing: border-box; 
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; padding: 5px 7px 5px 7px; 
+			text-decoration:none; display:inline-block; font-weight:normal; color: #FFFFFF;    
+			
+			-webkit-box-shadow: 0 0 15px 2px #013953;
+    	-moz-box-shadow: 0 0 15px 2px #013953;
+    	box-shadow: 0 0 15px 2px #013953;
+	}
+	
+	table {
+    table-layout: fixed;
+    word-wrap: break-word;
+   	-webkit-box-shadow: 0 0 15px 2px #013953;
+    -moz-box-shadow: 0 0 15px 2px #013953;
+    box-shadow: 0 0 15px 2px #013953;
+	}
+	
+	.btn {
+		-webkit-box-shadow: 0 0 15px 2px #013953;
+    -moz-box-shadow: 0 0 15px 2px #013953;
+    box-shadow: 0 0 15px 2px #013953;
+	}
+
+</style>
+<div id="container" style="width:1100px; margin-left: -90px; margin-right: auto;">
+
+<h1><%= @table_title %> Resellers</h1>
+
+<p>	
+	.
+	<% unless current_example.admin == false && current_example.region != "Latin America" && current_example.id != 17 %>
+	Download All:
+	<%= link_to "Excel", examples_resellers_path(format: "xls") %>
+	<% end %>
+	<span class="pull-right">
+		<b>Recent:&nbsp;&nbsp;</b><%= link_to "4 Months Ago to Today", examples_resellers_path(filter: "") %>
+		&nbsp; | &nbsp;
+		<%= link_to "Recently Approved", examples_resellers_path(filter: "Recent App") %>
+		&nbsp; | &nbsp;
+		<%= link_to "Recent Not Approved", examples_resellers_path(filter: "Recent Not") %>
+		&nbsp; | &nbsp;
+		<b>Archives:&nbsp;&nbsp;</b><%= link_to "View All", examples_resellers_path(filter: "all") %>
+		&nbsp;
+	</span>
+</p>
+
+<table id="resellers" class="table table-striped table-hover table-bordered" style="background-color: white">
+	<thead>
+		<button type="button" class="reset">Reset Search</button>
+		<th width="11%" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='black'" data-placeholder="Search">Contact Name</th>
+		<th width="11%" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='black'" data-placeholder="Search">Reseller</th>
+		<th width="7%" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='black'" data-placeholder="Search">Region</th>
+		<th width="9%" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='black'" data-placeholder="Search">Country</th>
+		<th width="10%" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='black'" data-placeholder="Search">Areas</th>
+		<th width="14%" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='black'" data-placeholder="Search">Email</th>
+		<th width="10%" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='black'" data-placeholder="Search">Distributor</th>
+		<th width="9%" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='black'" data-placeholder="Search">Registered</th>
+		<th width="8%" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='black'" data-placeholder="Search">Approved</th>
+		<th width="7%" onMouseOver="this.style.color='#00F'" onMouseOut="this.style.color='black'" data-placeholder="Search">Trained</th>
+		<th width="4%" class="filter-false"></th>
+	</thead>
+	<tbody>
+		<% #current_example.resellers.each do |reseller| %>
+		<% @resellers.each do |reseller| %>
+			<% # @reseller_dist = [] %>
+			<% # @reseller_dist < reseller.area_served %>
+			<% # if @reseller_dist.contains(@dashey) %>
+			
+				<tr>
+					<td><%= reseller.contact_name %></td>
+					<td><%= link_to reseller.company_name, examples_reseller_path(reseller) %></td>
+					<td><%= reseller.company_region %></td>
+					
+					<% if reseller.company_country == "United States" %>
+					<td><%= reseller.company_state %></td>
+					<% else %>
+					<td><%= reseller.company_country %></td>
+					<% end %>
+					<td><%= reseller.area_served.gsub(/['-]/, '')%></td>					
+					<td><%= reseller.contact_email %></td>
+					<td><%= reseller.distributor %></td>
+					<td><%= reseller.created_at.to_date.to_s %></td>
+					<td><%= reseller.approved ? "Yes" : "No" %></td>
+				<% if @reseller_users_incerts.include?(reseller.id) %>
+					<td><%= "Yes" %></td>
+				<% else %>
+					<td><%= "No" %></td>
+				<% end %>
+					<td><%= link_to "Edit", edit_examples_reseller_path(reseller) %>
+				</tr>
+		
+		<% end %>
+	</tbody>
+</table>
+
+
+</div>
+<script>
+
+	$(document).ready(function() 
+	    { 
+	        $("#resellers").tablesorter({
+	        widgets: ["filter"],
+	        
+	        widgetOptions: {
+	        	filter_columnFilters : true,
+	        	filter_ignoreCase : true,
+	        	filter_liveSearch : true,
+	        	filter_searchDelay : 300,
+	        	filter_reset : 'button.reset',
+	        	
+	        }
+	     });
+	     		
+	     	 $("#resellers").removeClass('tablesorter tablesorter-default');
+	    } 
+	);
+
+</script>
+

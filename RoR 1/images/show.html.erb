@@ -1,0 +1,15 @@
+<% provide(:title, "Images") %>
+<% provide(:images_class, "class=active") %>
+
+<%= render 'users/info' %>
+<%= render 'layouts/opentag' %>
+
+<h1><%= @image.img_name %></h1>
+
+<div class="row">
+	<ul class="images">
+			<li class="thumbnails">
+				<%= image_tag @image.img.url(:thumb) %>
+			</li>
+	</ul>
+</div>

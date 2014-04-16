@@ -1,0 +1,32 @@
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'x']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<style>
+	div.span3 {
+		-webkit-box-shadow: 0 0 15px 2px #013953;
+    -moz-box-shadow: 0 0 15px 2px #013953;
+    box-shadow: 0 0 15px 2px #013953;
+	}
+
+</style>
+
+<% provide(:title, "#{current_user.name} - Images") %>
+<% provide(:images_class, "class=active") %>
+
+<%= render 'users/info' %>
+<%= render 'layouts/opentag' %>
+
+<% if @view %>
+	<%= render @view %>
+<% end %>

@@ -1,0 +1,44 @@
+<style>
+	a:hover {
+		background: none;
+	}
+	
+	.images {
+		margin-bottom: 50px;
+	}
+	
+	div.span3 {
+		background: white;
+		border: 1px solid #eee;
+		border-radius: 5px;
+		padding: 30px;
+	}
+	
+	.images img {
+		height: 100px;
+	}
+</style>
+
+<h2>Consumer ATAs</h2>
+
+<div class="row images">
+	<div class="span3 pagination-centered">
+		<%= link_to (image_tag "/img/products/consumer_atas/ht702_704_slider.jpg", alt: "HT-704"), action: "index", filter: "ht702" %>
+		<h5>HT-702/704</h5>
+	</div>
+	<div class="span3 pagination-centered">
+		<%= link_to (image_tag "/img/products/consumer_atas/ht701_slider.png", alt: "HT-701"), action: "index", filter: "ht701" %>
+		<h5>HT-701</h5>
+	</div>
+	<div class="span3 pagination-centered">
+		<%= link_to (image_tag "/img/products/consumer_atas/ht502.jpg", alt: "HT-502"), action: "index", filter: "ht502" %>
+		<h5>HT-502</h5>
+	</div>
+</div>
+
+<div class="row images">
+	<div class="span3 pagination-centered">
+		<%= link_to (image_tag "/img/products/consumer_atas/ht503_1.png", alt: "HT-503"), action: "index", filter: "ht503" %>
+		<h5>HT-503</h5>
+	</div>
+</div>

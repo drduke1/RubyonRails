@@ -1,0 +1,39 @@
+<style>
+	a:hover {
+		background: none;
+	}
+	
+	.images {
+		margin-bottom: 50px;
+	}
+	
+	div.span3 {
+		background: white;
+		border: 1px solid #eee;
+		border-radius: 5px;
+		padding: 30px;
+	}
+	
+	.images img {
+		height: 100px;
+	}
+</style>
+
+<h2>Logos and Graphics</h2>
+
+<div class="row images">
+	<div class="span3 pagination-centered">
+		<%= link_to (image_tag "/img/products/logos_and_graphics/logos.png", alt: "Logos"), action: "index", filter: "logos" %>
+		<h5>Logos</h5>
+	</div>
+	
+	<div class="span3 pagination-centered">
+		<%= link_to (image_tag "/img/products/logos_and_graphics/certified_reseller_logo.jpg", alt: "Logos"), action: "index", filter: "certified" %>
+		<h5>Certified Reseller Logos</h5>
+	</div>
+	
+	<div class="span3 pagination-centered">
+		<%= link_to (image_tag "/img/logos_and_graphics.png", alt: "Graphics and Misc."), action: "index", filter: "graphics" %>
+		<h5>Graphics</h5>
+	</div>
+</div>

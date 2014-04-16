@@ -1,0 +1,1 @@
+This repository is for example files from current Ruby on Rails web applications.

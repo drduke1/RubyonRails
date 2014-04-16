@@ -1,0 +1,25 @@
+<% provide(:title, @reseller.company_name) %>
+<% provide(:resellers_class, "class=active") %>
+
+<%= render 'examples/info' %>
+
+<%= render 'layouts/opentag' %>
+
+
+
+	<p id="notice"><%= notice %></p>
+	
+	<div class="container">
+		<h2><%= @reseller.company_name %>!</h2>
+		
+		<div class="hero-unit">
+			<p>Leads: <%= @reseller.leads.count %></p>
+			<p>Users: <%= @reseller.users.count %></p>
+			<p>Tickets: 
+				<% @users.each do |user| %>
+					<%= user.tickets.count %>
+				<% end %>
+		</div>
+		
+		<%= link_to "Back", examples_resellers_path %>
+	</div>	

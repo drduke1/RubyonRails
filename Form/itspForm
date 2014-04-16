@@ -1,0 +1,220 @@
+<style>
+	.error {
+	    color: red;
+	    display: block;
+	}
+	.full {
+	    border:1px solid #641f1a;color:#641f1a;background:#ffd2d4 no-repeat; background-position:30px 20px;
+			margin:20px 5px 5px 80px;padding:10px; font-size:16px;
+	}
+	.cap {
+	    visibility: hidden;
+	    display: none;
+	}
+
+  #itsp-content {
+    font-size: 1.2em;
+  }
+
+  #itsp-form {
+    margin-top: 30px;
+  }
+
+  #itsp-form label {
+    width: 300px;
+    font-size: 1.1em;
+  }
+
+  #itsp-form h4 {
+    font-size: 1.0em;
+    display: inline;
+    float: left;
+    margin-left: 224px;
+    width: 75px;
+  }
+
+  #itsp-form label.custom {
+    float: left;
+  }
+
+  #itsp-form input, select {
+    display: block;
+    width: 300px;
+    font-size: 1.1em;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  #itsp-form input {
+    height: 25px;
+  }
+
+  #itsp-form input#submit {
+    height: 50px;
+    width: 100px;
+    margin: 30px auto;
+  }
+</style>
+
+<div id="itsp-content">
+
+  <ul>x:<br/><br/>
+    <li>x</li>
+    <li>x</li>
+    <li>x</li>
+    <li>x</li>
+  </ul>
+
+  <p>x</p>
+
+  <form id="itsp-form" method="post" action="https://www.x.com/save_itsp.php">
+    <label class="custom">Company name</label>
+    <input id="company_name" type="text" name="company_name" />
+                
+    <label class="custom">Company URL</label>
+    <input id="company_url" type="text" name="company_url" />
+
+    <label class="custom">Company address</label>
+    <input id="company_address" type="text" name="company_address" />
+
+    <label class="custom">Company Region</label>
+    <select id="region" name="region">
+      <option value='' selected="selected"></option>
+      <option value="na">North America</option>
+      <option value="latm">Latin America</option>
+      <option value="apac">Asia Pacific</option>
+      <option value="emea">Europe, Middle East, Africa</option>
+      <option value="china">China</option>
+    </select>
+
+    <label class="custom">Type of business</label>
+    <select id="type_of_business[]" name="type_of_business[]" multiple="multiple">
+      <option value="enterprise">Business sector/Enterprise</option>
+      <option value="residential">Residential</option>
+      <option value="wholesale">Wholesale VoIP Carrier</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label class="custom">Areas served</label>
+    <select id="areas_served[]" name="areas_served[]" multiple="multiple">
+      <option value="USA">USA</option>
+      <option value="Canada">Canada</option>
+      <option value="other">Other</option>
+    </select>
+
+    <br />
+
+    <label class="custom">Sales contact</label><br />
+    <h4>Name</h4>
+      <input id="sales_name" type="text" name="sales_name" />
+    <h4>Phone</h4>
+      <input type="text" name="sales_phone" />
+    <h4>Email</h4>
+      <input id="sales_email" type="text" name="sales_email" />
+
+    <br />
+   
+    <label class="custom">Testing contact</label><br />
+    <h4>Name</h4>
+      <input id="testing_name" type="text" name="testing_name" />
+    <h4>Phone</h4>
+      <input type="text" name="testing_phone" />
+    <h4>Email</h4>
+      <input id="testing_email" type="text" name="testing_email" />
+
+    <br />
+
+    <label class="custom">Switch Platform</label>
+    <select id="switch_platform[]" name="switch_platform[]" multiple="multiple">
+      <option value="asterisk">Asterisk</option>
+      <option value="broadsoft">Broadsoft</option>
+      <option value="metaswitch">Metaswitch</option>
+      <option value="sipx">SipX/eZuce</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label class="custom">Interested In Testing</label>
+    <select id="interested_in_testing[]" name="interested_in_testing[]" multiple="multiple">
+      <option value="atas">ATAs</option>
+      <option value="ip_phones">IP Phones</option>
+      <option value="gateways">Gateways</option>
+      <option value="ip_pbx">IP PBX</option>
+    </select>
+    
+<label class="custom">Enter the text in the image:</label>
+    
+    <img id="captcha" src="/securimage/securimage_show.php" alt="CAPTCHA Image" />
+<label class="custom">&nbsp;</label>
+    <input type="text" name="captcha_code" size="10" maxlength="6" />
+<label class="custom">&nbsp;</label>
+    <a href="#" onclick="document.getElementById('captcha').src = '/securimage/securimage_show.php?' + Math.random(); return false">[ Different Image ]</a>
+    
+    <input type="submit" id="submit" name="submit" value="Submit" />
+
+  </form>
+<div id="errors"></div>
+</div>
+<script>
+    $('#submit').click(function() {
+        $('.error').hide();
+
+        var hasError = false;
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+
+        if (($("#company_name").val() == '') || ($("#type_of_business[]").val() == '')) {
+           $("#errors").after('<span class="error">Please enter your Company name.</span>');
+           hasError = true;
+        }
+        if (($("#company_url").val() == '') || ($("#company_address").val() == '')) {
+           $("#errors").after('<span class="error">Please enter your Company information.</span>');
+           hasError = true;
+        }
+        if ($("#region").val() == '') {
+           $("#errors").after('<span class="error">Please enter your region.</span>');
+           hasError = true;
+        }
+        if ($("#areas_served[]").length < 0) {
+           $("#errors").after('<span class="error">Please enter your Areas served.</span>');
+           hasError = true;
+        }
+        if ($("#type_of_business[]").length < 0) {
+           $("#errors").after('<span class="error">Please enter your Type of business.</span>');
+           hasError = true;
+        }
+        if ($("#sales_name").val() == '') {
+           $("#errors").after('<span class="error">Please enter your Sales contact information.</span>');
+           hasError = true;
+        }
+        if ($("#sales_email").val() == '') {
+           $("#errors").after('<span class="error">Please enter a valid email for the Sales contact.</span>');
+           hasError = true;
+        }
+        var emailaddressSales = $("#sales_email").val();
+        if (!emailReg.test(emailaddressSales)) {
+           $("#errors").after('<span class="error">Please enter a valid email for the Sales contact.</span>');
+           hasError = true;
+        }
+        if ($("#testing_name").val() == '') {
+           $("#errors").after('<span class="error">Please enter your Tester contact information</span>');
+           hasError = true;
+        }
+        if ($("#testing_email").val() == '') {
+           $("#errors").after('<span class="error">Please enter a valid email for the Tester contact.</span>');
+           hasError = true;
+        }
+         var emailaddressTesting = $("#testing_email").val();
+        if (!emailReg.test(emailaddressTesting)) {
+           $("#errors").after('<span class="error">Please enter a valid email for the Tester contact.</span>');
+           hasError = true;
+        }
+        if ($("#switch_platform[]").length < 0) {
+           $("#errors").after('<span class="error">Please enter your Switch platform</span>');
+           hasError = true;
+        }
+        if ($("#interested_in_testing[]").length < 0) {
+           $("#errors").after('<span class="error">Please enter your Testing interests.</span>');
+           hasError = true;
+        }
+      if(hasError == true) { return false; }
+    });
+</script>
