@@ -1,0 +1,23 @@
+<h1>All Questions</h1>
+
+<ul class="questions">
+	<li>
+		<h4>Question
+		<div class="pull-right">
+			User | Type | Product | Functions
+		</div>
+	</li>
+	<%= render @questions %>
+	<%= link_to 'mc_question', id: "new_button" do %>
+		<button type="button" class="btn btn-lg btn-success">
+			<span class="glyphicon glyphicon-plus"></span>  New Multiple Choice
+		</button>
+	<% end %>
+	<%= link_to 'tf_question', id: "new_button" do %>
+		<button type="button" class="btn btn-lg btn-success">
+			<span class="glyphicon glyphicon-plus"></span>  New True/False
+		</button>
+	<% end %>
+</ul>
+
+<%= will_paginate %>

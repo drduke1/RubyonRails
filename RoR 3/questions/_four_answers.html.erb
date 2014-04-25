@@ -1,0 +1,14 @@
+<br/>
+<%= f.label :content, "Answer" %><br>
+<%= f.text_field :content, class: "input-lg" %>
+
+<%= f.label :correct, "Correct Answer?" %>&nbsp;
+<%= f.check_box :correct, :style => "width: 30px;"%>
+<hr/>
+<script>
+	$(document).ready(function(){
+		$("#answer_correct").bootstrapSwitch('onText', 'Yes');
+		$("#answer_correct").bootstrapSwitch('offText', 'No');
+		$("#answer_correct").bootstrapSwitch('size', 'large');
+	});
+</script>
